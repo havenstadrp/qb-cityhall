@@ -155,3 +155,18 @@ RegisterNetEvent('qb-cityhall:server:banPlayer', function()
     })
     DropPlayer(src, 'Attempting To Exploit')
 end)
+
+QBCore.Functions.CreateCallback("kp-cad:server:GetCharInfo", function(source, cb)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local charData = {}
+    charData.name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname
+    charData.birth = Player.PlayerData.charinfo.birthdate
+    charData.gender = Player.PlayerData.charinfo.gender
+    charData.nationality = Player.PlayerData.charinfo.nationality
+    charData.currentJob = Player.PlayerData.job.label
+    charData.phoneNumber = Player.PlayerData.charinfo.phone ~= nil and Player.PlayerData.charinfo.phone
+    charData.accountNumber = Player.PlayerData.charinfo.account ~= nil and Player.PlayerData.charinfo.account
+
+    cb(charData)
+end)

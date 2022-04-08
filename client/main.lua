@@ -3,11 +3,22 @@ local inCityhallPage = false
 local qbCityhall = {}
 
 qbCityhall.Open = function()
-    SendNUIMessage({
-        action = "open"
-    })
-    SetNuiFocus(true, true)
-    inCityhallPage = true
+    QBCore.Functions.TriggerCallback("kp-cad:server:GetCharInfo", function(result)
+        SendNUIMessage({
+            action = "open",
+            char = {
+                name = result.name,
+                birth = result.birth,
+                gender = result.gender,
+                nationality = result.nationality,
+                currentJob = result.currentJob,
+                phoneNumber = result.phoneNumber,
+                accountNumber = result.accountNumber
+            }
+        })
+        SetNuiFocus(true, true)
+        inCityhallPage = true
+    end)
 end
 
 qbCityhall.Close = function()
@@ -154,6 +165,22 @@ RegisterNUICallback('requestLicenses', function(data, cb)
         end
     end
     cb(availableLicenses)
+end)
+
+RegisterNUICallback('setJobInfo', function(data)
+    SendNUIMessage({
+        action = "setupJobInfo",
+        job = Config.AvaiableJobs[data.job]
+    })
+end)
+
+RegisterNUICallback('setGps', function(data)
+    if inRange then
+        SetNewWaypoint(Config.AvaiableJobs[data.job].gpsCoords.x, Config.AvaiableJobs[data.job].gpsCoords.y)
+        QBCore.Functions.Notify('Work location marked on your gps', 'success')
+    else
+        QBCore.Functions.Notify('Unfortunately will not work ...', 'error')
+    end
 end)
 
 RegisterNUICallback('applyJob', function(data)

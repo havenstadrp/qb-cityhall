@@ -22,7 +22,8 @@ client_script 'client/main.lua'
 files {
     'html/*.js',
     'html/*.html',
-    'html/*.css'
+    'html/*.css',
+    'html/images/*.png'
 }
 
 lua54 'yes'
