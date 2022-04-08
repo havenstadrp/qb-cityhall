@@ -228,6 +228,10 @@ body {
     letter-spacing: 0.05vh;
 }
 
+.request-identity-button:hover {
+    background: #fc1845;
+}
+
 .cityhall-job-page {
     display: none;
     position: relative;
@@ -345,7 +349,7 @@ body {
     bottom: 1vh;
 }
 .apply-job-button:hover, .gps-job-button:hover {
-    background: #28A745;
+    background: #fc1845;
 }
 .apply-job-button > p, .gps-job-button > p {
     color: #ededed;
