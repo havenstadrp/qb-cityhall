@@ -26,9 +26,9 @@ City Services for QB-Core Framework :us:
 - [qb-logs](https://github.com/qbcore-framework/qb-logs) - Log System
 
 ## Screenshots
-![City Services](https://prnt.sc/e4R_5b8gvJIJ)
-![Identity Page](https://prnt.sc/qwK6rdZGO9GX)
-![Apply Job Page](https://prnt.sc/sDRthRj0zUrS)
+![City Services](https://prnt.sc/e4R_5b8gvJIJ.png)
+![Identity Page](https://prnt.sc/qwK6rdZGO9GX.png)
+![Apply Job Page](https://prnt.sc/sDRthRj0zUrS.png)
 
 ## Features
 - Ability to see char information on the main page
