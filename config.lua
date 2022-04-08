@@ -6,7 +6,7 @@ Config.Cityhall = {
     coords = vector3(-265.0, -963.6, 31.2)
 }
 
--- THE NAME OF ARRAY MUST BE EQU
+-- THE ARRAY NAME MUST BE THE SAME AS THE JOB IN QB-CORE/SHARED/JOBS.LUA
 Config.AvaiableJobs = {
     ["trucker"] = {
         title = "Trucker",
