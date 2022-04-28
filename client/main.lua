@@ -44,7 +44,7 @@ end
 local function setCityhallPageState(bool, message)
     if message then
         local action = bool and "open" or "close"
-        QBCore.Functions.TriggerCallback("kp-cad:server:GetCharInfo", function(result)
+        QBCore.Functions.TriggerCallback("qb-cityhall:server:GetCharInfo", function(result)
             SendNUIMessage({
                 action = action,
                 char = {
@@ -255,7 +255,7 @@ RegisterNUICallback('setJobInfo', function(data)
 end)
 
 RegisterNUICallback('setGps', function(data)
-    if inRange then
+    if inRangeCityhall then
         SetNewWaypoint(Config.AvaiableJobs[data.job].gpsCoords.x, Config.AvaiableJobs[data.job].gpsCoords.y)
         QBCore.Functions.Notify('Work location marked on your gps', 'success')
     else

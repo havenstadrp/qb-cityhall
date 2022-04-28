@@ -128,7 +128,7 @@ QBCore.Commands.Add("drivinglicense", "Give a drivers license to someone", {{"id
     end
 end)
 
-QBCore.Functions.CreateCallback("kp-cad:server:GetCharInfo", function(source, cb)
+QBCore.Functions.CreateCallback("qb-cityhall:server:GetCharInfo", function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local charData = {}
