@@ -1,26 +1,38 @@
-var qbCityhall = {}
-var mouseOver = false;
-var selectedIdentity = null;
-var selectedIdentityType = null;
-var selectedJob = null;
-var selectedJobId = null;
+let mouseOver = false;
+let selectedIdentity = null;
+let selectedIdentityType = null;
+let selectedIdentityCost = null;
+let selectedJob = null;
+let selectedJobId = null;
 
-qbCityhall.Open = function(data) {
-    qbCityhall.fillCharInfo(data);
+Open = function(data) {
+    qbCityhall.FillCharInfo(data);
     $(".container").fadeIn(150);
 }
 
-qbCityhall.Close = function() {
+Close = function() {
     $(".container").fadeOut(150, function(){
-        qbCityhall.ResetPages();
+        ResetPages();
     });
     $.post('https://qb-cityhall/close');
-
     qbCityhall.ResetJobInfo()
 }
 
-qbCityhall.ResetPages = function() {
+ResetPages = function() {
     $(".cityhall-main-options").show();
+    $(selectedJob).removeClass("job-selected");
+    $(selectedIdentity).removeClass("job-selected");
+}
+
+SetJobs = function(jobs) {
+    $.each(jobs, (job, name) => {
+        let html = `<div class="job-page-block" data-job="${job}"><p>${name}</p></div>`;
+        $('.job-page-blocks-overflow').append(html);
+    })
+}
+
+ResetPages = function() {
+    $(".cityhall-option-blocks").show();
     $(".cityhall-identity-page").hide();
     $(".cityhall-job-page").hide();
 }
@@ -36,7 +48,7 @@ qbCityhall.ResetJobInfo = function() {
     selectedIdentity = null;
 }
 
-qbCityhall.fillCharInfo = function (data) {
+qbCityhall.FillCharInfo = function (data) {
     var gender = "Male"
     if (data.char.gender == 0) 
         gender = "Male"
@@ -67,10 +79,13 @@ $(document).ready(function(){
     window.addEventListener('message', function(event) {
         switch(event.data.action) {
             case "open":
-                qbCityhall.Open(event.data);
+                Open();
                 break;
             case "close":
-                qbCityhall.Close();
+                Close();
+                break;
+            case "setJobs":
+                SetJobs(event.data.jobs);
                 break;
             case "setupJobInfo":
                 qbCityhall.SetupJobInfo(event.data);
@@ -82,7 +97,7 @@ $(document).ready(function(){
 $(document).on('keydown', function() {
     switch(event.keyCode) {
         case 27: // ESC
-            qbCityhall.Close();
+            Close();
             break;
     }
 });
@@ -90,37 +105,34 @@ $(document).on('keydown', function() {
 $('.cityhall-option-block').click(function(e){
     e.preventDefault();
 
-    var blockPage = $(this).data('page');
-
-    $(".cityhall-main-options").fadeOut(100, function(){
-        $(".cityhall-"+blockPage+"-page").fadeIn(100);
+    let blockPage = $(this).data('page');
+    $(".cityhall-main-blocks").fadeOut(100, () => {
+        $(`.cityhall-${blockPage}-page`).fadeIn(100);
     });
-
     if (blockPage == "identity") {
         $(".identity-page-blocks").html("");
-        $(".identity-page-blocks").html(
-            '<div class="identity-page-block" data-type="id_card">'+
-                '<div class="identity-license-image">'+
-                    '<img src="images/id_card.png" alt="id_card">'+
-                '</div>'+
-                '<div class="identity-license-info">'+
-                    '<div class="license-title-box"><span id="info-label">ID Card</span></div>'+
-                    '<div class="license-info-box"><span id="info-label">Request new ID Card</span></div>'+
-                '</div>'+
-            '</div>');
+        // $(".identity-page-blocks").html(
+        //     '<div class="identity-page-block" data-type="id_card">'+
+        //         '<div class="identity-license-image">'+
+        //             '<img src="images/id_card.png" alt="id_card">'+
+        //         '</div>'+
+        //         '<div class="identity-license-info">'+
+        //             '<div class="license-title-box"><span id="info-label">ID Card</span></div>'+
+        //             '<div class="license-info-box"><span id="info-label">Request new ID Card</span></div>'+
+        //         '</div>'+
+        //     '</div>');
 
         $.post('https://qb-cityhall/requestLicenses', JSON.stringify({}), function(licenses){
-            $.each(licenses, function(i, license){
-                var elem = '<div class="identity-page-block" data-type="'+license.idType+'">'+
-                                '<div class="identity-license-image">'+
-                                    '<img src="images/'+license.idType+'.png" alt="id_card">'+
-                                '</div>'+
-                                '<div class="identity-license-info">'+
-                                    '<div class="license-title-box"><span id="info-label">'+license.label+'</span></div>'+
-                                    '<div class="license-info-box"><span id="info-label">Request new '+license.label+'</span></div>'+
-                                '</div>'+
-                            '</div>';
-
+            $.each(licenses, (i, license) => {
+                let elem = `<div class="identity-page-block" data-type="${i}"> data-cost="${license.cost}"`+
+                            `<div class="identity-license-image">`+
+                            `<img src="images/${license.idType}.png" alt="license_${license.idType}">`+
+                            `</div>`+
+                            `<div class="identity-license-info">`+
+                            `<div class="license-title-box"><span id="info-label">${license.label}</span></div>`+
+                            `<div class="license-info-box"><span id="info-label">Request new ${license.label}</span></div>`+
+                            `</div>`+
+                            `</div>`;
                 $(".identity-page-blocks").append(elem);
             });
         });
@@ -129,25 +141,14 @@ $('.cityhall-option-block').click(function(e){
 
 $(document).on("click", ".identity-page-block", function(e){
     e.preventDefault();
-
-    var idType = $(this).data('type');
-
-    selectedIdentityType = idType;
-
+    selectedIdentityType = $(this).data('type');
+    selectedIdentityCost = $(this).data('cost');
     if (selectedIdentity == null) {
         $(this).addClass("identity-selected");
         // $(".hover-description").fadeIn(10);
         selectedIdentity = this;
-        if (idType == "id_card") {
-            $(".request-identity-button").fadeIn(100);
-            $(".request-identity-button").html("<p>Buy $50</p>")
-        } else if (idType == "driver_license") {
-            $(".request-identity-button").fadeIn(100);
-            $(".request-identity-button").html("<p>Buy $50</p>")
-        } else if (idType == "weaponlicense") {
-            $(".request-identity-button").fadeIn(100);
-            $(".request-identity-button").html("<p>Buy $50</p>")
-        }
+        $(".request-identity-button").fadeIn(100);
+        $(".request-identity-button").html(`<p>Buy $${selectedIdentityCost}</p>`);
     } else if (selectedIdentity == this) {
         $(this).removeClass("identity-selected");
         selectedIdentity = null;
@@ -156,33 +157,22 @@ $(document).on("click", ".identity-page-block", function(e){
         $(selectedIdentity).removeClass("identity-selected");
         $(this).addClass("identity-selected");
         selectedIdentity = this;
-        if (idType == "id_card") {
-            $(".request-identity-button").html("<p>Buy $50</p>")
-        } else if (idType == "driver_license") {
-            $(".request-identity-button").html("<p>Buy $50</p>")
-        } else if (idType == "weaponlicense") {
-            $(".request-identity-button").html("<p>Buy $50</p>")
-        }
+        $(".request-identity-button").html("<p>Buy</p>");
     }
 });
 
 $(".request-identity-button").click(function(e){
     e.preventDefault();
-
     $.post('https://qb-cityhall/requestId', JSON.stringify({
-        idType: selectedIdentityType
+        type: selectedIdentityType,
+        cost: selectedIdentityCost
     }))
-
-    qbCityhall.ResetPages();
+    ResetPages();
 });
 
 $(document).on("click", ".job-page-block", function(e){
     e.preventDefault();
-
-    var job = $(this).data('job');
-
-    selectedJobId = job;
-
+    selectedJobId = $(this).data('job');
     if (selectedJob == null) {
         $(this).addClass("job-selected");
         selectedJob = this;
@@ -215,18 +205,14 @@ $(document).on('click', '.gps-job-button', function(e){
 
 $(document).on('click', '.apply-job-button', function(e){
     e.preventDefault();
-
-    $.post('https://qb-cityhall/applyJob', JSON.stringify({
-        job: selectedJobId
-    }))
+    $.post('https://qb-cityhall/applyJob', JSON.stringify(selectedJobId))
 
     qbCityhall.ResetJobInfo();
-    qbCityhall.ResetPages();
+    ResetPages();
 });
 
 $(document).on('click', '.back-to-main', function(e){
     e.preventDefault();
-
     qbCityhall.ResetJobInfo();  
-    qbCityhall.ResetPages();
+    ResetPages();
 });
