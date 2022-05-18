@@ -15,21 +15,21 @@ Config.Cityhalls = {
         },
         licenses = {
             ["id_card"] = {
-                label = "ID Card",
+                label = "Identiteitskaart",
                 cost = 50,
             },
             ["driver_license"] = {
-                label = "Driver License",
+                label = "Rijbewijs",
                 cost = 50,
                 metadata = "driver"
             },
             ["weaponlicense"] = {
-                label = "Weapon License",
+                label = "Wapen licentie",
                 cost = 50,
                 metadata = "weapon"
             },
             ["permit"] = {
-                label = "Permit",
+                label = "Tijdelijk Rijbewijs",
                 cost = 50,
                 metadata = "driver"
             },
@@ -46,7 +46,7 @@ Config.DrivingSchools = {
             display = 4,
             scale = 0.65,
             colour = 3,
-            title = "Driving School"
+            title = "Rijschool"
         },
         instructors = {
             "DJD56142",
@@ -60,24 +60,24 @@ Config.Peds = {
     -- Cityhall Ped
     {
         model = 'a_m_m_hasjew_01',
-        coords = vec4(-262.79, -964.18, 30.22, 181.71),
+        coords = vec4(-556.200, -185.991, 37.280, 220.0),
         scenario = 'WORLD_HUMAN_STAND_MOBILE',
         cityhall = true,
         zoneOptions = { -- Used for when UseTarget is false
-            length = 3.0,
-            width = 3.0,
-            debugPoly = false
-        }
-    },
-    -- Driving School Ped
-    {
-        model = 'a_m_m_eastsa_02',
-        coords = vec4(240.91, -1379.2, 32.74, 138.96),
-        scenario = 'WORLD_HUMAN_STAND_MOBILE',
-        drivingschool = true,
-        zoneOptions = { -- Used for when UseTarget is false
-            length = 3.0,
-            width = 3.0
+            length = 5.0,
+            width = 5.0,
+            debugPoly = true
         }
     }
+    -- -- Driving School Ped
+    -- {
+    --     model = 'a_m_m_eastsa_02',
+    --     coords = vec4(240.91, -1379.2, 32.74, 138.96),
+    --     scenario = 'WORLD_HUMAN_STAND_MOBILE',
+    --     drivingschool = true,
+    --     zoneOptions = { -- Used for when UseTarget is false
+    --         length = 3.0,
+    --         width = 3.0
+    --     }
+    -- }
 }
