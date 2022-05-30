@@ -6,6 +6,9 @@ local availableJobs = {
     ["reporter"] = "Journalist",
     ["garbage"] = "Vuilniskar",
     ["bus"] = "Bus chauffeur",
+    ["taco"] = "Taco verkoper",
+    ["hotdog"] = "Hotdog verkoper",
+    ["vinyard"] = "Wijngaard plukker",
 }
 
 -- Functions
