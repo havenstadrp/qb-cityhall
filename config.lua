@@ -155,7 +155,7 @@ Config.DrivingSchools = {
 Config.Peds = {
     -- Cityhall Ped
     {
-        model = 'a_m_m_hasjew_01', -- City hall Office 1
+        model = 'csb_screen_writer', -- City hall Office 1
         coords = vector4(-538.084, -195.964, 37.226, 7.556),
         scenario = 'WORLD_HUMAN_STAND_MOBILE',
         cityhall = true,
@@ -166,7 +166,7 @@ Config.Peds = {
         }
     },
     {
-        model = 'a_m_m_hasjew_01', -- City hall Office 2
+        model = 'cs_tanisha', -- City hall Office 2
         coords = vector4(-533.078, -193.000, 37.226, 48.97),
         scenario = 'WORLD_HUMAN_STAND_MOBILE',
         cityhall = true,
@@ -177,7 +177,7 @@ Config.Peds = {
         }
     },
     {
-        model = 'a_m_m_hasjew_01', -- City hall Office 3
+        model = 'csb_screen_writer', -- City hall Office 3
         coords = vector4(-528.184, -190.231, 37.226, 38.52),
         scenario = 'WORLD_HUMAN_STAND_MOBILE',
         cityhall = true,
@@ -188,7 +188,7 @@ Config.Peds = {
         }
     },
     {
-        model = 'a_m_m_hasjew_01', -- City hall Office 3
+        model = 'cs_tanisha', -- City hall Office 3
         coords = vector4(1699.416, 3784.877, 33.766, 214.0),
         scenario = 'WORLD_HUMAN_STAND_MOBILE',
         cityhall = true,
