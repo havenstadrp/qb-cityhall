@@ -66,7 +66,7 @@ RegisterNetEvent('qb-cityhall:server:requestId', function(item, hall)
         info.firstname = Player.PlayerData.charinfo.firstname
         info.lastname = Player.PlayerData.charinfo.lastname
         info.birthdate = Player.PlayerData.charinfo.birthdate
-    elseif identityData.item == "permit" then
+    elseif item == "permit" then
         info.firstname = Player.PlayerData.charinfo.firstname
         info.lastname = Player.PlayerData.charinfo.lastname
         info.birthdate = Player.PlayerData.charinfo.birthdate
