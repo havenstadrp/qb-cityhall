@@ -34,14 +34,14 @@ FillCharInfo = function (data) {
     else
         gender = "Female"
 
-    var elem = '<div class="char-info-title"><span>Character Information</span></div>' +
-        '<div class="char-info-box"><span id="info-label">Name: </span><span class="char-info-js">'+ data.char.name + '</span></div>' + 
-        '<div class="char-info-box"><span id="info-label">Birth date: </span><span class="char-info-js">'+ data.char.birth +'</span></div>' +
-        '<div class="char-info-box"><span id="info-label">Gender: </span><span class="char-info-js">'+ gender +'</span></div>' +
-        '<div class="char-info-box"><span id="info-label">Nationality: </span><span class="char-info-js">'+ data.char.nationality +'</span></div>' +
-        '<div class="char-info-box"><span id="info-label">Current Job: </span><span class="char-info-js">'+ data.char.currentJob +'</span></div>' +
-        '<div class="char-info-box"><span id="info-label">Phone number: </span><span class="char-info-js">'+ data.char.phoneNumber +'</span></div>' +
-        '<div class="char-info-box"><span id="info-label">Account number: </span><span class="char-info-js">'+ data.char.accountNumber +'</span></div>';
+    var elem = '<div class="char-info-title"><span>Character Informatie</span></div>' +
+        '<div class="char-info-box"><span id="info-label">Naam: </span><span class="char-info-js">'+ data.char.name + '</span></div>' + 
+        '<div class="char-info-box"><span id="info-label">Geboortedatum: </span><span class="char-info-js">'+ data.char.birth +'</span></div>' +
+        '<div class="char-info-box"><span id="info-label">Geslacht: </span><span class="char-info-js">'+ gender +'</span></div>' +
+        '<div class="char-info-box"><span id="info-label">Nationaliteit: </span><span class="char-info-js">'+ data.char.nationality +'</span></div>' +
+        '<div class="char-info-box"><span id="info-label">Huidige job: </span><span class="char-info-js">'+ data.char.currentJob +'</span></div>' +
+        '<div class="char-info-box"><span id="info-label">Telefoon nummer: </span><span class="char-info-js">'+ data.char.phoneNumber +'</span></div>' +
+        '<div class="char-info-box"><span id="info-label">Account nummer: </span><span class="char-info-js">'+ data.char.accountNumber +'</span></div>';
     
     $( ".cityhall-personal-info" ).html(elem);
 }
@@ -66,8 +66,8 @@ ResetJobInfo = function() {
 
 SetupJobInfo = function (data) {
     var elem = '<div class="job-info-title"><span>'+ data.job.title +'</span></div>' +
-        '<div class="job-info-box"><span id="info-label">Salary: </span><span class="job-info-js">$'+ data.job.salary +'</span></div>' + 
-        '<div class="job-info-box"><span id="info-label">Description: </span><span class="job-info-js">'+ data.job.description +'</span></div>    ';
+        '<div class="job-info-box"><span id="info-label">Salaris: </span><span class="job-info-js">€'+ data.job.salary +'</span></div>' + 
+        '<div class="job-info-box"><span id="info-label">Beschrijving: </span><span class="job-info-js">'+ data.job.description +'</span></div>';
 
     $( ".job-details-info" ).html(elem);
 }
@@ -118,7 +118,7 @@ $('.cityhall-option-block').click(function(e){
                             `</div>`+
                             `<div class="identity-license-info">`+
                             `<div class="license-title-box"><span id="info-label">${license.label}</span></div>`+
-                            `<div class="license-info-box"><span id="info-label">Request new ${license.label}</span></div>`+
+                            `<div class="license-info-box"><span id="info-label">Aanvraag ${license.label}</span></div>`+
                             `</div>`+
                             `</div>`;
                 $(".identity-page-blocks").append(elem);
@@ -136,7 +136,7 @@ $(document).on("click", ".identity-page-block", function(e){
         // $(".hover-description").fadeIn(10);
         selectedIdentity = this;
         $(".request-identity-button").fadeIn(100);
-        $(".request-identity-button").html(`<p>Buy $${selectedIdentityCost}</p>`);
+        $(".request-identity-button").html(`<p>Vraag aan €${selectedIdentityCost}</p>`);
     } else if (selectedIdentity == this) {
         $(this).removeClass("identity-selected");
         selectedIdentity = null;
@@ -145,7 +145,7 @@ $(document).on("click", ".identity-page-block", function(e){
         $(selectedIdentity).removeClass("identity-selected");
         $(this).addClass("identity-selected");
         selectedIdentity = this;
-        $(".request-identity-button").html("<p>Buy</p>");
+        $(".request-identity-button").html("<p>Vraag aan</p>");
     }
 });
 
