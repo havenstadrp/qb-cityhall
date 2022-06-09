@@ -262,10 +262,10 @@ RegisterNUICallback('requestId', function(id, cb)
     if inRangeCityhall and license and id.cost == license.cost then
         QBCore.Functions.TriggerCallback("qb-cityhall:CheckLicenseItem",function(checkLicense)
             if checkLicense then
-                QBCore.Functions.Notify('You already have the license', 'error', 3500)
+                QBCore.Functions.Notify('Je hebt al een identiteitskaart', 'error', 3500)
             else
                 TriggerServerEvent('qb-cityhall:server:requestId', id.type, closestCityhall)
-                QBCore.Functions.Notify(('You have received your %s for $%s'):format(license.label, id.cost), 'success', 3500)
+                QBCore.Functions.Notify(('Je hebt je %s ontvangen voor $%s'):format(license.label, id.cost), 'success', 3500)
             end
         end, id.type)
     else
