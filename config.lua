@@ -210,3 +210,61 @@ Config.Peds = {
     --     }
     -- }
 }
+
+-- THE ARRAY NAME MUST BE THE SAME AS THE JOB IN QB-CORE/SHARED/JOBS.LUA
+Config.AvaiableJobs = {
+    ["trucker"] = {
+        title = "Vrachtwagen",
+        salary = 150,
+        description = "Huur een bedrijfswagen en verdeel de leveringen in de stad.",
+        gpsCoords = vector3(145.48, -3210.43, 5.86),
+    },
+    ["taxi"] = {
+        title = "Taxi",
+        salary = 150,
+        description = "Huur een taxi en breng de passagiers naar de gevraagde bestemming.",
+        gpsCoords = vector3(909.51, -177.36, 74.22),
+    },
+    ["tow"] = {
+        title = "Takeldienst",
+        salary = 150,
+        description = "Huurt een sleepwagen en sleep de verkeerd geparkeerde of aangevraagde voertuigen.",
+        gpsCoords = vector3(491.27, -1316.17, 29.26),
+    },
+    ["reporter"] = {
+        title = "Journalist",
+        salary = 125,
+        description = "Behandel het laatste nieuws en word de beste journalist van de stad.",
+        gpsCoords = vector3(-604.94, -931.29, 23.86),
+    },
+    ["garbage"] = {
+        title = "Vuilniskar",
+        salary = 100,
+        description = "Huur een vuilniswagen en verzamel het afval op de aangegeven punten in de stad.",
+        gpsCoords = vector3(-313.84, -1522.81, 27.55),
+    },
+    ["bus"] = {
+        title = "Bus chauffeur",
+        salary = 150,
+        description = "Huur een bus en vervoer passagiers naar verschillende haltes in de stad.",
+        gpsCoords = vector3(462.21, -641.32, 28.45),
+    },
+    ["vinyard"] = {
+        title = "Wijngaard plukker",
+        salary = 150,
+        description = "Pluk vers fruit en maak wijn en andere dranken.",
+        gpsCoords = vector3(462.21, -641.32, 28.45),
+    },
+    ["hotdog"] = {
+        title = "Hotdog verkoper",
+        salary = 100,
+        description = "Verkoop de beste worst in Havenstad en zorg dat niemand honger meer moet leiden.",
+        gpsCoords = vector3(462.21, -641.32, 28.45),
+    },
+    ["taco"] = {
+        title = "Taco verkoper",
+        salary = 100,
+        description = "Maak smaakmakende taco's met vlees geimporteerd uit Mexico.",
+        gpsCoords = vector3(462.21, -641.32, 28.45),
+    },
+}
