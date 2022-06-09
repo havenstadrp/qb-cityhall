@@ -78,6 +78,16 @@ RegisterNetEvent('qb-cityhall:server:requestId', function(item, hall)
     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], 'add')
 end)
 
+QBCore.Functions.CreateCallback("qb-cityhall:CheckLicenseItem",function(source,cb,item)
+	local Player = QBCore.Functions.GetPlayer(source)
+	local checkitem = Player.Functions.GetItemByName(item)
+	if checkitem ~= nil then
+        cb(true)
+	else
+		cb(false)
+	end
+end)
+
 RegisterNetEvent('qb-cityhall:server:sendDriverTest', function(instructors)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
