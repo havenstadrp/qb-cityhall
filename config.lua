@@ -210,3 +210,43 @@ Config.Peds = {
     --     }
     -- }
 }
+
+-- THE ARRAY NAME MUST BE THE SAME AS THE JOB IN QB-CORE/SHARED/JOBS.LUA
+Config.AvaiableJobs = {
+    ["trucker"] = {
+        title = "Trucker",
+        salary = 100,
+        description = "Rent a company van and distribute deliveries around town.",
+        gpsCoords = vector3(145.48, -3210.43, 5.86),
+    },
+    ["taxi"] = {
+        title = "Taxi",
+        salary = 200,
+        description = "Rent a taxi and take the passengers to the requested destination.",
+        gpsCoords = vector3(909.51, -177.36, 74.22),
+    },
+    ["tow"] = {
+        title = "Tow Truck",
+        salary = 300,
+        description = "Rents a Tow Truck and tows the wrongly parked or requested vehicles.",
+        gpsCoords = vector3(491.27, -1316.17, 29.26),
+    },
+    ["reporter"] = {
+        title = "News Reporter",
+        salary = 400,
+        description = "Cover the latest news and be the best journalist in town.",
+        gpsCoords = vector3(-604.94, -931.29, 23.86),
+    },
+    ["garbage"] = {
+        title = "Garbage Collector",
+        salary = 500,
+        description = "Rent a garbage truck and collect the garbage at the indicated points throughout the city.",
+        gpsCoords = vector3(-313.84, -1522.81, 27.55),
+    },
+    ["bus"] = {
+        title = "Bus Driver",
+        salary = 600,
+        description = "Rent a bus and transport passengers to various stops throughout the city.",
+        gpsCoords = vector3(462.21, -641.32, 28.45),
+    },
+}

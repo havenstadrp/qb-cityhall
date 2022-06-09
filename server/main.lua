@@ -141,3 +141,18 @@ QBCore.Commands.Add("drivinglicense", "Give a drivers license to someone", {{"id
         TriggerClientEvent('QBCore:Notify', source, "Player Not Online", "error")
     end
 end)
+
+QBCore.Functions.CreateCallback("qb-cityhall:server:GetCharInfo", function(source, cb)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local charData = {}
+    charData.name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname
+    charData.birth = Player.PlayerData.charinfo.birthdate
+    charData.gender = Player.PlayerData.charinfo.gender
+    charData.nationality = Player.PlayerData.charinfo.nationality
+    charData.currentJob = Player.PlayerData.job.label
+    charData.phoneNumber = Player.PlayerData.charinfo.phone ~= nil and Player.PlayerData.charinfo.phone
+    charData.accountNumber = Player.PlayerData.charinfo.account ~= nil and Player.PlayerData.charinfo.account
+
+    cb(charData)
+end)

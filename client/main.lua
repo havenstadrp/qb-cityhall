@@ -13,7 +13,6 @@ local table_clone = table.clone
 local blips = {}
 
 -- Functions
-
 local function getClosestHall()
     local distance = #(playerCoords - Config.Cityhalls[1].coords)
     local closest = 1
@@ -45,9 +44,20 @@ end
 local function setCityhallPageState(bool, message)
     if message then
         local action = bool and "open" or "close"
-        SendNUIMessage({
-            action = action
-        })
+        QBCore.Functions.TriggerCallback("qb-cityhall:server:GetCharInfo", function(result)
+            SendNUIMessage({
+                action = action,
+                char = {
+                    name = result.name,
+                    birth = result.birth,
+                    gender = result.gender,
+                    nationality = result.nationality,
+                    currentJob = result.currentJob,
+                    phoneNumber = result.phoneNumber,
+                    accountNumber = result.accountNumber
+                }
+            })
+        end)
     end
     SetNuiFocus(bool, bool)
     inCityhallPage = bool
@@ -269,6 +279,22 @@ RegisterNUICallback('requestLicenses', function(_, cb)
     cb(availableLicenses)
 end)
 
+RegisterNUICallback('setJobInfo', function(data)
+    SendNUIMessage({
+        action = "setupJobInfo",
+        job = Config.AvaiableJobs[data.job]
+    })
+end)
+
+RegisterNUICallback('setGps', function(data)
+    if inRangeCityhall then
+        SetNewWaypoint(Config.AvaiableJobs[data.job].gpsCoords.x, Config.AvaiableJobs[data.job].gpsCoords.y)
+        QBCore.Functions.Notify('Work location marked on your gps', 'success')
+    else
+        QBCore.Functions.Notify('Unfortunately will not work ...', 'error')
+    end
+end)
+
 RegisterNUICallback('applyJob', function(job, cb)
     if inRangeCityhall then
         TriggerServerEvent('qb-cityhall:server:ApplyJob', job, Config.Cityhalls[closestCityhall].coords)
@@ -279,7 +305,6 @@ RegisterNUICallback('applyJob', function(job, cb)
 end)
 
 -- Threads
-
 CreateThread(function()
     while true do
         if isLoggedIn then
