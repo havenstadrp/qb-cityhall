@@ -105,18 +105,20 @@ local function initBlips()
             })
         end
     end
-    for i = 1, #Config.DrivingSchools do
-        local school = Config.DrivingSchools[i]
-        if school.showBlip then
-            blips[#blips+1] = createBlip({
-                coords = school.coords,
-                sprite = school.blipData.sprite,
-                display = school.blipData.display,
-                scale = school.blipData.scale,
-                colour = school.blipData.colour,
-                shortRange = true,
-                title = school.blipData.title
-            })
+    if Config.DMV then
+        for i = 1, #Config.DrivingSchools do
+            local school = Config.DrivingSchools[i]
+            if school.showBlip then
+                blips[#blips+1] = createBlip({
+                    coords = school.coords,
+                    sprite = school.blipData.sprite,
+                    display = school.blipData.display,
+                    scale = school.blipData.scale,
+                    colour = school.blipData.colour,
+                    shortRange = true,
+                    title = school.blipData.title
+                })
+            end
         end
     end
 end
@@ -139,13 +141,15 @@ local function spawnPeds()
         if Config.UseTarget then
             local opts = nil
             if current.drivingschool then
-                opts = {
-                    label = 'Take Driving Lessons',
-                    icon = 'fa-solid fa-car-side',
-                    action = function()
-                        TriggerServerEvent('qb-cityhall:server:sendDriverTest', Config.DrivingSchools[closestDrivingSchool].instructors)
-                    end
-                }
+                if Config.DMV then
+                    opts = {
+                        label = 'Take Driving Lessons',
+                        icon = 'fa-solid fa-car-side',
+                        action = function()
+                            TriggerServerEvent('qb-cityhall:server:sendDriverTest', Config.DrivingSchools[closestDrivingSchool].instructors)
+                        end
+                    }
+                end
             elseif current.cityhall then
                 opts = {
                     label = 'Open Cityhall',
@@ -173,7 +177,7 @@ local function spawnPeds()
                 zone:onPlayerInOut(function(inside)
                     if isLoggedIn and closestCityhall and closestDrivingSchool then
                         if inside then
-                            if current.drivingschool then
+                            if current.drivingschool and Config.DMV then
                                 inRangeDrivingSchool = true
                                 exports['qb-core']:DrawText('[E] Take Driving Lessons')
                             elseif current.cityhall then
@@ -182,7 +186,7 @@ local function spawnPeds()
                             end
                         else
                             exports['qb-core']:HideText()
-                            if current.drivingschool then
+                            if current.drivingschool and Config.DMV then
                                 inRangeDrivingSchool = false
                             elseif current.cityhall then
                                 inRangeCityhall = false

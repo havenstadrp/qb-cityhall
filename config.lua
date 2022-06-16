@@ -2,6 +2,8 @@ Config = Config or {}
 
 Config.UseTarget = GetConvar('UseTarget', 'false') == 'true' -- Use qb-target interactions (don't change this, go to your server.cfg and add `setr UseTarget true` to use this and just that from true to false or the other way around)
 
+Config.DMV = false
+
 Config.Cityhalls = {
     { -- Cityhall 1
         coords = vec3(-538.581, -193.470, 38.226),
