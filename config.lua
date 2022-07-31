@@ -269,4 +269,10 @@ Config.AvaiableJobs = {
         description = "Maak smaakmakende taco's met vlees geimporteerd uit Mexico.",
         gpsCoords = vector3(462.21, -641.32, 28.45),
     },
+    ["lumberjack"] = {
+        title = "Hout Hakker",
+        salary = 50,
+        description = "Help Havenstad met het verzamelen van hout en houtbomen.",
+        gpsCoords = vector3(1167.73, -1347.27, 33.92),
+    },
 }
